@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+# This script adds a CIDR to IP Set lists on AWS WAF v2
 
 import sys
 import argparse
 import boto3
+
+whitelist_name = 'IP_whitelist'
+blacklist_name = 'IP_blacklist'
 
 def add_cidr(ip_set, new_cidr):
     response = client.get_ip_set(Name=ip_set['Name'], Scope='REGIONAL', Id=ip_set['Id'])
@@ -20,9 +24,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.list == 'w':
-        list_name = 'IP_whitelist'
+        list_name = whitelist_name
     elif args.list == 'b':
-        list_name = 'IP_blacklist'
+        list_name = blacklist_name
     else:
         sys.exit('ERROR: Invalid list, it must be either w or b')
     

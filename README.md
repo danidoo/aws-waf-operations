@@ -1,6 +1,11 @@
 # Construa dashboards operacionais no Elasticsearch para operação do AWS WAF
 
-Neste repositório compartilho código python para adaptação dos logs do AWS WAF e templates de dashboards para o Kibana
+Neste repositório compartilho código python para adaptação dos logs do AWS WAF (usando o lambda de transformação do Kinesis Firehose) e templates de dashboards para o Kibana.
+
+![Kibana Dashboard 1][dashboard1.png]
+![Kibana Dashboard 2][dashboard2.png]
+
+
 
 A implementação está baseada neste blogpost, atualizando a versão do ES para 7.4:
 https://aws.amazon.com/pt/blogs/security/how-to-analyze-aws-waf-logs-using-amazon-elasticsearch-service/
