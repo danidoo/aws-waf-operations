@@ -12,29 +12,27 @@ PUT  _template/awswaf-logs
 {
     "index_patterns": ["awswaf-*"],
     "settings": {
-    "number_of_shards": 1
+        "number_of_shards": 1
     },
     "mappings": {
-      "waflog": {
         "properties": {
-          "httpRequest": {
-            "properties": {
-              "clientIp": {
-                "type": "keyword",
-                "fields": {
-                  "keyword": {
-                    "type": "ip"
-                  }
+            "httpRequest": {
+                "properties": {
+                    "clientIp": {
+                        "type": "keyword",
+                        "fields": {
+                            "keyword": {
+                                "type": "ip"
+                            }
+                        }
+                    }
                 }
-              }
+            },
+            "timestamp": {
+                "type": "date",
+                "format": "epoch_millis"
             }
-          },
-          "timestamp": {
-            "type": "date",
-            "format": "epoch_millis"
-          }
-      }
+        }
     }
-  }
 }
 </pre>
