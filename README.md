@@ -2,8 +2,8 @@
 
 Neste repositório compartilho código python para adaptação dos logs do AWS WAF (usando o lambda de transformação do Kinesis Firehose) e templates de dashboards para o Kibana.
 
-![Kibana Dashboard 1][dashboard1.png]
-![Kibana Dashboard 2][dashboard2.png]
+![Kibana Dashboard 1](dashboard1.png)
+![Kibana Dashboard 2](dashboard2.png)
 
 
 
