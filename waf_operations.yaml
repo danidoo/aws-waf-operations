@@ -270,7 +270,7 @@ Resources:
       Role: !GetAtt LambdaRole.Arn
       Code:
         S3Bucket: !Ref LambdaBucket
-        S3Key: !Join [ '/', [ !Ref LambdaBucket, lambda.zip ] ]
+        S3Key: !Join [ '/', [ !Ref LambdaBucketKey, lambda.zip ] ]
 
 
   ESCognitoRole:
@@ -413,7 +413,7 @@ Resources:
       Role: !GetAtt CustomResourceRole.Arn
       Code:
         S3Bucket: !Ref LambdaBucket
-        S3Key: !Join [ '/', [ !Ref LambdaBucket, cr_lambda.zip ] ]
+        S3Key: !Join [ '/', [ !Ref LambdaBucketKey, cr_lambda.zip ] ]
 
   CustomResource:
     Type: Custom::WAFDashboards
