@@ -6,6 +6,14 @@ Parameters:
     Description: Your e-mail for receiving a temporary password
     Type: String
 
+  LambdaBucket:
+    Description: An S3 Bucket to store the lambda files
+    Type: String
+
+  LambdaBucketKey:
+    Description: An S3 Bucket Key to store the lambda files
+    Type: String
+
   EnvironmentName:
     Description: An environment name that is prefixed to resource names
     Type: String
@@ -25,6 +33,7 @@ Parameters:
     Description: Please enter the IP range (CIDR notation) for the private subnet
     Type: String
     Default: 10.0.2.0/24
+
 
 Resources:
 
@@ -260,8 +269,8 @@ Resources:
           - !Ref PrivateSubnet
       Role: !GetAtt LambdaRole.Arn
       Code:
-        S3Bucket: wesrod-org-sandbox-temp
-        S3Key: lambda/waf/log-enrichment.zip
+        S3Bucket: !Ref LambdaBucket
+        S3Key: !Join [ '/', [ !Ref LambdaBucket, lambda.zip ] ]
 
 
   ESCognitoRole:
@@ -403,8 +412,8 @@ Resources:
       Timeout: 30
       Role: !GetAtt CustomResourceRole.Arn
       Code:
-        S3Bucket: wesrod-org-sandbox-temp
-        S3Key: lambda/waf/cr-lambda.zip
+        S3Bucket: !Ref LambdaBucket
+        S3Key: !Join [ '/', [ !Ref LambdaBucket, cr_lambda.zip ] ]
 
   CustomResource:
     Type: Custom::WAFDashboards
