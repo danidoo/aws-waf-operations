@@ -230,8 +230,6 @@ Resources:
 
   S3Bucket:
     Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub ${EnvironmentName}-s3bucket
 
 
   LambdaRole:
