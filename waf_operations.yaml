@@ -15,9 +15,8 @@ Parameters:
     Type: String
 
   EnvironmentName:
-    Description: An environment name that is prefixed to resource names
+    Description: Enter a lower case + numbers + hyphens name
     Type: String
-    Default: wafoperations
 
   VpcCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
@@ -305,7 +304,6 @@ Resources:
   ElasticsearchDomain: 
     Type: AWS::Elasticsearch::Domain
     Properties:
-      DomainName: !Sub ${EnvironmentName}-es-domain
       ElasticsearchVersion: 7.7
       ElasticsearchClusterConfig: 
         InstanceCount: 1
