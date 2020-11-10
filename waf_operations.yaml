@@ -251,7 +251,19 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonKinesisFirehoseFullAccess
         - arn:aws:iam::aws:policy/AmazonEC2FullAccess
       Path: /
-  
+
+  LogEnrichmentLayer:
+    Type: AWS::Lambda::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+        - python2.7
+      Content:
+        S3Bucket: !Ref LambdaBucket
+        S3Key: !Join [ '/', [ !Ref LambdaBucketKey, layer.zip ] ]
+      Description: Log enrichment layer
+      LayerName: log-enrichment-layer
+      LicenseInfo: MIT
+
   LogEnrichment:
     Type: AWS::Lambda::Function
     Properties:
@@ -259,6 +271,8 @@ Resources:
       Handler: lambda_function.lambda_handler
       MemorySize: 256
       Runtime: python2.7
+      Layers: 
+        - !Ref LogEnrichmentLayer
       Timeout: 120
       VpcConfig:
         SecurityGroupIds:
@@ -460,3 +474,7 @@ Outputs:
   ElasticSearchURL:
     Description: ElasticSearch URL  
     Value: !GetAtt ElasticsearchDomain.DomainEndpoint
+  
+  KibanaURL:
+    Description: Kibana Dashboard URL
+    Value: !Join [ '', [ !GetAtt ElasticsearchDomain.DomainEndpoint,  /_plugin/kibana ] ]
